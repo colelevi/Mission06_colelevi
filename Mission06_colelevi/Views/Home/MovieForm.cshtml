@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Movie Form";
+}
+@model Mission06_colelevi.Models.ApplicationResponse
+
+<h1>Fill out Movie Form</h1>
+
+<div>
+    <form method="post">
+        <label asp-for="Title">Movie Title:</label>
+        <input asp-for="Title" />
+        <br />
+        <label asp-for="Category">Category:</label>
+        <select asp-for="Category">
+            <option>Select An Option</option>
+            <option value="Action/Adventure">Action/Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Family">Family</option>
+            <option value="Horror/Suspense">Horror/Suspense</option>
+            <option value="Misc">Misc</option>
+            <option value="TV">TV</option>
+            <option value="VHS">VHS</option>
+        </select>
+        <br />
+        <label asp-for="Year">Year:</label>
+        <input asp-for="Year" />
+        <br />
+        <label asp-for="Director">Director:</label>
+        <input asp-for="Director" />
+        <br />
+        <label asp-for="Rating">Rating:</label>
+        <input asp-for="Rating" />
+        <br />
+        <label asp-for="Edited">Edited:</label>
+        <select asp-for="Edited">
+            <option>Select an Option</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <br />
+        <label asp-for="Lent">Lent:</label>
+        <input asp-for="Lent" />
+        <br />
+        <label asp-for="Notes">Notes:</label>
+        <textarea rows="4" asp-for="Notes"></textarea>
+        <br />
+        <button type="submit">Submit</button>
+        <div asp-validation-summary="All"></div>
+    </form>
+</div>
