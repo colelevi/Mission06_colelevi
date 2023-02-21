@@ -12,8 +12,6 @@ namespace Mission06_colelevi.Models
         [Required]
         public int MovieId { get; set; } 
         [Required]
-        public string Category { get; set; }
-        [Required]
         public string Title { get; set; }
         [Required]
         public ushort Year { get; set; }
@@ -26,5 +24,9 @@ namespace Mission06_colelevi.Models
         [MaxLength(25)]
         public string Notes { get; set; }
 
+        // Build Foreign Key Relationship
+        [Required]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

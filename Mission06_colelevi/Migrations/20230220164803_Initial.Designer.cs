@@ -8,7 +8,7 @@ using Mission06_colelevi.Models;
 namespace Mission06_colelevi.Migrations
 {
     [DbContext(typeof(MovieFormContext))]
-    [Migration("20230214041447_Initial")]
+    [Migration("20230220164803_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,8 @@ namespace Mission06_colelevi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -54,13 +53,15 @@ namespace Mission06_colelevi.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Comedy",
+                            CategoryId = 1,
                             Director = "Me",
                             Edited = true,
                             Lent = "Spencer",
@@ -72,7 +73,7 @@ namespace Mission06_colelevi.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Drama",
+                            CategoryId = 2,
                             Director = "Me",
                             Edited = true,
                             Lent = "Cole",
@@ -81,6 +82,71 @@ namespace Mission06_colelevi.Migrations
                             Title = "asdf2",
                             Year = (ushort)2009
                         });
+                });
+
+            modelBuilder.Entity("Mission06_colelevi.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Misc"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "TV"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "VCR"
+                        });
+                });
+
+            modelBuilder.Entity("Mission06_colelevi.Models.ApplicationResponse", b =>
+                {
+                    b.HasOne("Mission06_colelevi.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
